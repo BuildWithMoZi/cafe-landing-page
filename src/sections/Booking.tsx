@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { HiCheckCircle } from "react-icons/hi2";
 import { SectionHeading } from "@/components/SectionHeading";
 import { cn } from "@/utils/cn";
+import { cafeImages } from "@/utils/cafeImage";
 
 const fields = [
   { id: "name", label: "Full Name", type: "text", required: true },
@@ -31,12 +32,13 @@ export function Booking() {
 
   return (
     <section id="contact" className="section-padding relative">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Reservations"
           title="Book Your Table"
           subtitle="Reserve your spot in our sanctuary. Intimate seating, exceptional service, unforgettable evenings."
         />
+        <div className="grid items-stretch gap-8 lg:grid-cols-[1fr_minmax(240px,320px)]">
         <motion.form
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,6 +119,21 @@ export function Booking() {
             </AnimatePresence>
           </Button>
         </motion.form>
+
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="hidden overflow-hidden rounded-3xl ring-1 ring-green-dark/10 lg:block"
+        >
+          <img
+            src={cafeImages.booking}
+            alt="Welcoming dining space at Belfry & Co."
+            loading="lazy"
+            className="h-full min-h-[420px] w-full object-cover"
+          />
+        </motion.div>
+        </div>
       </div>
     </section>
   );
