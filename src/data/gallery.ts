@@ -1,0 +1,58 @@
+export const galleryImages = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+    alt: "Barista pouring latte art",
+    category: "barista",
+    tall: true,
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80",
+    alt: "Cozy cafe interior",
+    category: "interior",
+    tall: false,
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=80",
+    alt: "Fresh pastries display",
+    category: "desserts",
+    tall: false,
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80",
+    alt: "Coffee beans roasting",
+    category: "coffee",
+    tall: true,
+  },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=80",
+    alt: "Modern cafe seating",
+    category: "interior",
+    tall: false,
+  },
+  {
+    id: 6,
+    src: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80",
+    alt: "Espresso machine in action",
+    category: "barista",
+    tall: false,
+  },
+  {
+    id: 7,
+    src: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80",
+    alt: "Artisan dessert plating",
+    category: "desserts",
+    tall: true,
+  },
+  {
+    id: 8,
+    src: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+    alt: "Morning coffee ritual",
+    category: "coffee",
+    tall: false,
+  },
+] as const;

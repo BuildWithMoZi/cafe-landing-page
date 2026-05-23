@@ -1,0 +1,360 @@
+@import "tailwindcss";
+
+/* Scan all source files so utilities are always generated in dev + prod */
+@source "../**/*.{ts,tsx}";
+@source "../../index.html";
+
+/* ============================================================
+   Belfry & Co. — Interior-inspired luxury cafe palette
+   ============================================================ */
+@theme inline {
+  --font-display: "Playfair Display", serif;
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-primary: #d97a32;
+  --color-secondary: #8fb59c;
+  --color-dark: #0f0f0f;
+  --color-dark2: #1a1a1a;
+  --color-cream: #f4e7d3;
+  --color-beige: #dcc7aa;
+  --color-orange-dark: #b85c2e;
+  --color-green-dark: #3d5b4f;
+  --color-neon-blue: #4d7cfe;
+  --color-neon-purple: #c14dff;
+
+  --color-surface: #0f0f0f;
+  --color-surface-elevated: #1a1a1a;
+  --color-coffee-deep: #0f0f0f;
+  --color-coffee: #3d5b4f;
+  --color-cream-muted: #dcc7aa;
+  --color-gold: #d97a32;
+  --color-gold-bright: #e8954f;
+  --color-ember: #b85c2e;
+  --color-mocha: #3d5b4f;
+  --color-mint: #8fb59c;
+
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-mint: rgba(143, 181, 156, 0.08);
+}
+
+/* Fallback tokens — always on :root even if Tailwind strips custom rules */
+:root {
+  --belfry-bg: #0f0f0f;
+  --belfry-bg-2: #1a1a1a;
+  --belfry-primary: #d97a32;
+  --belfry-primary-dark: #b85c2e;
+  --belfry-mint: #8fb59c;
+  --belfry-forest: #3d5b4f;
+  --belfry-cream: #f4e7d3;
+  --belfry-beige: #dcc7aa;
+  --belfry-neon-blue: #4d7cfe;
+  --belfry-neon-purple: #c14dff;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: auto;
+    background-color: var(--belfry-bg);
+    color: var(--belfry-beige);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    background-color: var(--belfry-bg);
+    color: var(--belfry-beige);
+    overflow-x: hidden;
+    cursor: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html[data-custom-cursor="true"] body {
+    cursor: none;
+  }
+
+  #root {
+    min-height: 100vh;
+    background-color: var(--belfry-bg);
+  }
+
+  ::selection {
+    background: rgba(217, 122, 50, 0.35);
+    color: #ffffff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #ffffff;
+  }
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer utilities {
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 45%, #3d5b4f 100%);
+  }
+
+  .bg-cta-gradient {
+    background: linear-gradient(135deg, #d97a32 0%, #b85c2e 100%);
+  }
+
+  .bg-neon-gradient {
+    background: linear-gradient(135deg, #4d7cfe 0%, #c14dff 100%);
+  }
+
+  .bg-mint-glow {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(143, 181, 156, 0.18),
+      transparent 70%
+    );
+  }
+
+  .bg-section-mint {
+    background: linear-gradient(
+      180deg,
+      #0f0f0f 0%,
+      rgba(61, 91, 79, 0.35) 50%,
+      #0f0f0f 100%
+    );
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #f4e7d3 40%, #d97a32 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-neon {
+    background: linear-gradient(135deg, #4d7cfe, #c14dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-mint {
+    background: rgba(143, 181, 156, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(143, 181, 156, 0.2);
+  }
+
+  .glow-primary,
+  .glow-gold {
+    box-shadow:
+      0 0 40px rgba(217, 122, 50, 0.22),
+      0 0 80px rgba(184, 92, 46, 0.12);
+  }
+
+  .glow-neon {
+    box-shadow:
+      0 0 50px rgba(77, 124, 254, 0.15),
+      0 0 80px rgba(193, 77, 255, 0.1);
+  }
+
+  .glow-mint {
+    box-shadow: 0 0 50px rgba(143, 181, 156, 0.2);
+  }
+
+  .section-padding {
+    @apply px-4 py-20 sm:px-6 md:px-10 lg:px-16 lg:py-28;
+  }
+
+  /* Shared bright background (post-hero sections) */
+  .bg-sections-light {
+    background: linear-gradient(
+      165deg,
+      #fffdf9 0%,
+      #faf6ee 30%,
+      #f4e7d3 65%,
+      #ede0cc 100%
+    );
+  }
+
+  .bg-sections-light-glow {
+    background:
+      radial-gradient(
+        ellipse 90% 70% at 50% 15%,
+        rgba(143, 181, 156, 0.22),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 55% 45% at 85% 75%,
+        rgba(217, 122, 50, 0.1),
+        transparent 50%
+      );
+  }
+
+  .glass-card-light {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(61, 91, 79, 0.12);
+    box-shadow: 0 8px 40px rgba(61, 91, 79, 0.08);
+  }
+
+  .gradient-text-light {
+    background: linear-gradient(135deg, #3d5b4f 0%, #d97a32 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Floating navbar (light sections) */
+  .navbar-shell {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(217, 122, 50, 0.18);
+    box-shadow:
+      0 12px 48px rgba(61, 91, 79, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  }
+
+  .navbar-shell-scrolled {
+    border-color: rgba(217, 122, 50, 0.35);
+    box-shadow:
+      0 16px 56px rgba(217, 122, 50, 0.14),
+      0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  }
+
+  .nav-link {
+    @apply relative rounded-lg px-3 py-2 font-heading text-[10px] font-semibold uppercase tracking-wider transition-all duration-300 xl:text-xs;
+    color: #5c5048;
+  }
+
+  .nav-link:hover {
+    color: #d97a32;
+    background: rgba(217, 122, 50, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .nav-link-active {
+    color: #d97a32;
+    background: rgba(217, 122, 50, 0.14);
+    box-shadow: 0 2px 12px rgba(217, 122, 50, 0.15);
+  }
+
+  .nav-link-active::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    height: 2px;
+    width: 60%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #d97a32, transparent);
+  }
+}
+
+.sections-light {
+  color: #5c5048;
+}
+
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.swiper-pagination-bullet {
+  background: var(--belfry-primary) !important;
+  opacity: 0.35 !important;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Light mode */
+html.light {
+  background-color: #f4e7d3;
+  color: #1a1a1a;
+}
+
+html.light body,
+html.light #root {
+  background-color: #f4e7d3;
+  color: #1a1a1a;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4 {
+  color: #0f0f0f;
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(61, 91, 79, 0.12);
+}
+
+html.light .gradient-text {
+  background: linear-gradient(135deg, #3d5b4f, #d97a32);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Respect OS reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+}
