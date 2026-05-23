@@ -3,14 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { navLinks } from "@/data/nav";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { BrandLogo } from "@/components/BrandLogo";
 import { cn } from "@/utils/cn";
-
-interface NavbarProps {
-  isDark: boolean;
-  onToggleTheme: () => void;
-}
 
 function NavLink({
   href,
@@ -37,7 +31,7 @@ function NavLink({
   );
 }
 
-export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
+export function Navbar() {
   const [showNav, setShowNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -146,14 +140,9 @@ export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
               ))}
             </ul>
 
-            <div className="hidden shrink-0 items-center gap-2 md:flex lg:gap-3">
-              <ThemeToggle
-                isDark={isDark}
-                onToggle={onToggleTheme}
-                variant="light"
-              />
+            <div className="hidden shrink-0 items-center md:flex">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-                <Button size="sm" className="hidden lg:inline-flex" asChild>
+                <Button size="sm" asChild>
                   <a href="#contact" data-cursor-hover>
                     Order Now
                   </a>
@@ -161,12 +150,7 @@ export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
               </motion.div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
-              <ThemeToggle
-                isDark={isDark}
-                onToggle={onToggleTheme}
-                variant="light"
-              />
+            <div className="flex shrink-0 items-center lg:hidden">
               <motion.button
                 type="button"
                 onClick={() => setMobileOpen(!mobileOpen)}

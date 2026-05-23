@@ -3,12 +3,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "@/styles/index.css";
 
-// Apply dark theme before first paint
-const stored = localStorage.getItem("belfry-theme");
-const theme = stored === "light" ? "light" : "dark";
-document.documentElement.dataset.theme = theme;
-document.documentElement.classList.toggle("light", theme === "light");
-document.documentElement.style.colorScheme = theme;
+// Fixed default theme (dark hero + light sections via layout)
+document.documentElement.dataset.theme = "dark";
+document.documentElement.classList.remove("light");
+document.documentElement.style.colorScheme = "dark";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -11,7 +11,7 @@ import {
   refreshScrollTriggers,
 } from "@/animations/scrollAnimations";
 
-const INITIAL_VISIBLE = 6;
+const INITIAL_VISIBLE = 9;
 
 export function Gallery() {
   const [lightbox, setLightbox] = useState<(typeof galleryImages)[number] | null>(
@@ -49,33 +49,30 @@ export function Gallery() {
         title="Moments Worth Savoring"
         subtitle="Step inside our world — from bean to cup, ambiance to artistry."
       />
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        <AnimatePresence mode="popLayout">
+      <div className="mx-auto max-w-7xl columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4">
+        <AnimatePresence>
           {visibleImages.map((img, i) => (
             <motion.button
               key={img.id}
-              layout
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35 }}
               data-gallery-reveal
               data-gallery-reveal-new={
                 expanded && i >= INITIAL_VISIBLE ? "new" : undefined
               }
-              exit={{ opacity: 0, y: -20, scale: 0.96 }}
-              transition={{ duration: 0.35 }}
               onClick={() => setLightbox(img)}
               data-cursor-hover
-              className={`group relative overflow-hidden rounded-2xl ${
-                img.tall ? "row-span-2" : ""
-              } ${i === 0 ? "col-span-2 md:col-span-1" : ""}`}
+              className="group relative mb-3 block w-full break-inside-avoid overflow-hidden rounded-2xl sm:mb-4"
             >
               <img
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                className={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${
-                  img.tall ? "h-full min-h-[280px]" : "h-48 md:h-52"
-                }`}
+                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-green-dark/80 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-green-dark/80 via-green-dark/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="font-heading text-xs uppercase tracking-wider text-primary">
                   {img.category}
                 </span>

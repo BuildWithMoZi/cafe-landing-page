@@ -86,7 +86,6 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
             <SteamEffect />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/30 to-transparent" />
         <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full glass-card-light px-3 py-1">
           <HiStar className="h-4 w-4 text-primary" />
           <span className="text-sm font-semibold text-green-dark">

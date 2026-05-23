@@ -5,6 +5,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { useGsapScope } from "@/hooks/useGsapScope";
 import { animateOffersSection } from "@/animations/scrollAnimations";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { cafeImages } from "@/utils/cafeImage";
 
 function getWeekendCountdown() {
   const now = new Date();
@@ -120,27 +121,45 @@ export function Offers() {
               </MagneticButton>
             </div>
 
-            <div ref={countdownRef} className="grid grid-cols-4 gap-3">
-              {(
-                [
-                  ["days", time.days],
-                  ["hours", time.hours],
-                  ["min", time.minutes],
-                  ["sec", time.seconds],
-                ] as const
-              ).map(([label, value]) => (
-                <div
-                  key={label}
-                  className="rounded-2xl bg-white/60 p-4 text-center backdrop-blur-sm ring-1 ring-green-dark/10"
-                >
-                  <span className="font-display text-3xl font-bold text-primary md:text-4xl">
-                    {String(value).padStart(2, "0")}
-                  </span>
-                  <span className="mt-1 block text-xs uppercase text-[#6B5B4F]">
-                    {label}
-                  </span>
-                </div>
-              ))}
+            <div className="space-y-5">
+              <div ref={countdownRef} className="grid grid-cols-4 gap-3">
+                {(
+                  [
+                    ["days", time.days],
+                    ["hours", time.hours],
+                    ["min", time.minutes],
+                    ["sec", time.seconds],
+                  ] as const
+                ).map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="rounded-2xl bg-white/60 p-4 text-center backdrop-blur-sm ring-1 ring-green-dark/10"
+                  >
+                    <span className="font-display text-3xl font-bold text-primary md:text-4xl">
+                      {String(value).padStart(2, "0")}
+                    </span>
+                    <span className="mt-1 block text-xs uppercase text-[#6B5B4F]">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                {cafeImages.offers.map((item) => (
+                  <div
+                    key={item.src}
+                    className="overflow-hidden rounded-xl ring-1 ring-green-dark/10"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      loading="lazy"
+                      className="aspect-square h-full w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
