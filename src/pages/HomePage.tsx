@@ -6,6 +6,7 @@ import { Offers } from "@/sections/Offers";
 import { Testimonials } from "@/sections/Testimonials";
 import { Gallery } from "@/sections/Gallery";
 import { Booking } from "@/sections/Booking";
+import { Inquiry } from "@/sections/Inquiry";
 import { Footer } from "@/sections/Footer";
 import { SectionsShell } from "@/components/SectionsShell";
 
@@ -21,6 +22,7 @@ export function HomePage() {
         <Testimonials />
         <Gallery />
         <Booking />
+        <Inquiry />
         <Footer />
       </SectionsShell>
     </>

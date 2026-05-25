@@ -89,6 +89,14 @@ export function Footer() {
                   {BRAND_EMAIL}
                 </a>
               </li>
+              <li>
+                <a
+                  href="#inquiry"
+                  className="font-medium text-primary hover:underline underline-offset-2"
+                >
+                  Send an inquiry →
+                </a>
+              </li>
             </ul>
           </div>
 
