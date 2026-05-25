@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiBars3, HiXMark } from "react-icons/hi2";
-import { navLinks } from "@/data/nav";
+import { navLinks, navActions } from "@/data/nav";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/BrandLogo";
 import { cn } from "@/utils/cn";
@@ -31,6 +31,12 @@ function NavLink({
   );
 }
 
+const allNavHrefs = [
+  ...navLinks.map((l) => l.href),
+  ...navActions.map((l) => l.href),
+  "#home",
+] as const;
+
 export function Navbar() {
   const [showNav, setShowNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +57,7 @@ export function Navbar() {
           setActive((prev) => (prev === "#home" ? "#menu" : prev));
         }
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(hero);
@@ -70,8 +76,8 @@ export function Navbar() {
   useEffect(() => {
     if (!showNav) return;
 
-    const sectionEls = navLinks
-      .map((l) => document.querySelector(l.href))
+    const sectionEls = allNavHrefs
+      .map((href) => document.querySelector(href))
       .filter((el): el is HTMLElement => el !== null);
 
     const observer = new IntersectionObserver(
@@ -87,7 +93,7 @@ export function Navbar() {
           }
         }
       },
-      { rootMargin: "-25% 0px -40% 0px", threshold: [0.15, 0.4, 0.6] }
+      { rootMargin: "-25% 0px -40% 0px", threshold: [0.15, 0.4, 0.6] },
     );
 
     sectionEls.forEach((el) => observer.observe(el));
@@ -112,7 +118,7 @@ export function Navbar() {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
             "navbar-shell fixed top-3 left-1/2 z-[9000] w-[calc(100%-1rem)] max-w-6xl -translate-x-1/2 rounded-2xl transition-all duration-500 sm:top-4 md:top-6",
-            scrolled && "navbar-shell-scrolled"
+            scrolled && "navbar-shell-scrolled",
           )}
         >
           <nav className="flex min-h-14 items-center justify-between gap-2 px-3 py-2 sm:min-h-[3.75rem] sm:gap-3 sm:px-4 md:px-6">
@@ -140,14 +146,30 @@ export function Navbar() {
               ))}
             </ul>
 
-            <div className="hidden shrink-0 items-center md:flex">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-                <Button size="sm" asChild>
-                  <a href="#contact" data-cursor-hover>
-                    Order Now
-                  </a>
-                </Button>
-              </motion.div>
+            <div className="hidden shrink-0 items-center gap-2 md:flex">
+              {navActions.map((action) => (
+                <motion.div
+                  key={action.href}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <Button
+                    size="sm"
+                    variant={action.href === "#contact" ? "outline" : "ghost"}
+                    className={cn(
+                      action.href === "#inquiry" &&
+                        "text-green-dark hover:bg-primary/10 hover:text-primary",
+                      action.href === "#contact" &&
+                        "border-green-dark/25 text-green-dark hover:border-primary/50 hover:bg-primary/10 hover:text-primary",
+                    )}
+                    asChild
+                  >
+                    <a href={action.href} data-cursor-hover>
+                      {action.label}
+                    </a>
+                  </Button>
+                </motion.div>
+              ))}
             </div>
 
             <div className="flex shrink-0 items-center lg:hidden">
@@ -163,7 +185,7 @@ export function Navbar() {
                 whileTap={{ scale: 0.94 }}
                 className={cn(
                   "flex h-9 w-9 items-center justify-center rounded-xl border border-primary/25 bg-white/60 text-primary transition-colors sm:h-10 sm:w-10",
-                  mobileOpen && "border-primary/50 bg-primary/10"
+                  mobileOpen && "border-primary/50 bg-primary/10",
                 )}
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -203,13 +225,31 @@ export function Navbar() {
                 className="overflow-hidden border-t border-primary/15 lg:hidden"
               >
                 <ul className="flex max-h-[70vh] flex-col gap-1 overflow-y-auto p-4">
+                  <motion.li
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <a
+                      href="#home"
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "block rounded-xl px-4 py-3 font-heading text-sm font-medium transition-all duration-300",
+                        active === "#home"
+                          ? "bg-primary/15 text-primary shadow-sm"
+                          : "text-green-dark hover:bg-primary/10 hover:text-primary",
+                      )}
+                    >
+                      Home
+                    </a>
+                  </motion.li>
                   {navLinks.map((link, i) => (
                     <motion.li
                       key={link.href}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: -10, opacity: 0 }}
-                      transition={{ delay: i * 0.05, duration: 0.3 }}
+                      transition={{ delay: (i + 1) * 0.05, duration: 0.3 }}
                     >
                       <a
                         href={link.href}
@@ -218,25 +258,35 @@ export function Navbar() {
                           "block rounded-xl px-4 py-3 font-heading text-sm font-medium transition-all duration-300",
                           active === link.href
                             ? "bg-primary/15 text-primary shadow-sm"
-                            : "text-green-dark hover:bg-primary/10 hover:text-primary"
+                            : "text-green-dark hover:bg-primary/10 hover:text-primary",
                         )}
                       >
                         {link.label}
                       </a>
                     </motion.li>
                   ))}
-                  <motion.li
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: navLinks.length * 0.05 }}
-                    className="pt-2 md:hidden"
-                  >
-                    <Button className="w-full" asChild>
-                      <a href="#contact" onClick={() => setMobileOpen(false)}>
-                        Order Now
-                      </a>
-                    </Button>
-                  </motion.li>
+                  <li className="my-2 border-t border-primary/10" aria-hidden />
+                  {navActions.map((action, i) => (
+                    <motion.li
+                      key={action.href}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (navLinks.length + i + 1) * 0.05 }}
+                    >
+                      <Button
+                        className="w-full"
+                        variant={action.href === "#contact" ? "outline" : "ghost"}
+                        asChild
+                      >
+                        <a
+                          href={action.href}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {action.label}
+                        </a>
+                      </Button>
+                    </motion.li>
+                  ))}
                 </ul>
               </motion.div>
             )}

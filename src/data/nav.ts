@@ -1,9 +1,14 @@
+/** Primary section links (center of navbar) */
 export const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "Menu", href: "#menu" },
   { label: "About", href: "#about" },
-  { label: "Special Offers", href: "#offers" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Offers", href: "#offers" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Reviews", href: "#testimonials" },
+] as const;
+
+/** Secondary actions (right cluster, before Order Now) */
+export const navActions = [
+  { label: "Reserve", href: "#contact" },
+  { label: "Inquiry", href: "#inquiry" },
 ] as const;

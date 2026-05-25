@@ -22,6 +22,23 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
+## Pre-booking, inquiry & admin email
+
+The reservation flow is a 4-step wizard at `#contact` (navbar **Reserve**, hero **Book a Table**).
+
+General questions and non-reservation messages use the inquiry form at `#inquiry` (navbar **Inquiry**). Both use the same Web3Forms key.
+
+To notify admin on submit (GitHub Pages–friendly):
+
+1. Copy `.env.example` to `.env`
+2. Create a free key at [web3forms.com](https://web3forms.com)
+3. Set `VITE_WEB3FORMS_ACCESS_KEY` in `.env`
+4. Rebuild and redeploy
+
+Without the key, **dev** shows a successful demo submit (console log); **production** shows a configuration message.
+
+For GitHub Pages deploy, add `VITE_WEB3FORMS_ACCESS_KEY` (and optional `VITE_ADMIN_EMAIL`) under **Settings → Secrets and variables → Actions**.
+
 ## Build
 
 ```bash
@@ -54,8 +71,9 @@ src/
 6. Special offers + countdown
 7. Testimonials carousel
 8. Masonry gallery + lightbox
-9. Reservation booking form
-10. Premium footer
+9. Multi-step pre-booking wizard (calendar → time slots → guests → details)
+10. Inquiry form (general, catering, events, feedback, partnerships)
+11. Premium footer
 
 ## Features
 

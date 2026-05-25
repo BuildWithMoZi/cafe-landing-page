@@ -1,20 +1,11 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/MagneticButton";
 import { FloatingParticles } from "@/components/FloatingParticles";
-import { SteamEffect } from "@/components/SteamEffect";
 import { useMouseParallax } from "@/hooks/useMouseParallax";
 import { HiStar, HiChevronDown } from "react-icons/hi2";
-import { BRAND_NAME } from "@/data/brand";
-import { cafeImages } from "@/utils/cafeImage";
-
-const CoffeeBeans3D = lazy(() =>
-  import("@/components/CoffeeBeans3D").then((m) => ({
-    default: m.CoffeeBeans3D,
-  })),
-);
+import { BRAND_NAME, HERO_IMAGE_SRC } from "@/data/brand";
 
 const headlineWords = ["Crafted", "Coffee", "For", "Modern", "Souls"];
 
@@ -114,32 +105,35 @@ export function Hero() {
 
         <motion.div
           style={{ x: parallax.x, y: parallax.y }}
-          className='relative mx-auto aspect-square w-full max-w-lg'>
+          className='relative mx-auto flex w-full max-w-md items-center justify-center lg:max-w-lg'>
           <motion.div
-            className='h-full w-full'
-            animate={prefersReducedMotion ? undefined : { y: [0, -20, 0] }}
+            className='relative w-full'
+            animate={prefersReducedMotion ? undefined : { y: [0, -16, 0] }}
             transition={
               prefersReducedMotion
                 ? undefined
-                : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+                : { duration: 3, repeat: Infinity, ease: "easeInOut" }
             }>
-          <div className='absolute inset-0 rounded-full bg-gradient-to-br from-primary/25 via-mint/15 to-transparent blur-3xl' />
-          <Suspense fallback={null}>
-            <CoffeeBeans3D />
-          </Suspense>
-          <div className='relative z-10 flex h-full items-center justify-center'>
+          <div className='pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_70%_at_50%_45%,rgba(217,122,50,0.22),transparent_70%)]' />
+          <div className='relative z-10 flex items-center justify-center px-4'>
             <div className='relative'>
-              <SteamEffect />
-              <img
-                src={cafeImages.hero}
-                alt={`Premium ${BRAND_NAME} coffee cup`}
-                className='relative z-10 w-72 rounded-3xl object-cover shadow-2xl shadow-black/50 sm:w-96'
+              <motion.img
+                src={HERO_IMAGE_SRC}
+                alt={`Signature iced coffee at ${BRAND_NAME}`}
+                className='relative z-10 mx-auto h-auto w-full max-w-[280px] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.55)] sm:max-w-[320px] lg:max-w-[360px]'
                 loading='eager'
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               />
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className='absolute -inset-8 rounded-full border border-dashed border-primary/25'
+                animate={prefersReducedMotion ? undefined : { rotate: 360 }}
+                transition={
+                  prefersReducedMotion
+                    ? undefined
+                    : { duration: 24, repeat: Infinity, ease: "linear" }
+                }
+                className='absolute -inset-6 rounded-[3rem] border border-dashed border-primary/20 sm:-inset-8'
               />
             </div>
           </div>
