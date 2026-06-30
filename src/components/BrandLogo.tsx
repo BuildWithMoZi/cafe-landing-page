@@ -1,25 +1,21 @@
 import { motion } from "framer-motion";
-import { BRAND_LOGO_SRC, BRAND_NAME } from "@/data/brand";
+import { BRAND_PLACEHOLDER } from "@/data/brand";
 import { cn } from "@/utils/cn";
 
-/** Fixed box sizes — width + height together so the image cannot blow up layout */
+/** Text size per usage context — placeholder wordmark until a real logo is added */
 const variants = {
-  /** Compact navbar: crops category tags, shows icon + wordmark */
+  /** Compact navbar */
   nav: {
-    box: "h-9 w-[7.25rem] sm:h-10 sm:w-[8.25rem] md:h-11 md:w-[9.5rem] lg:h-12 lg:w-[10.75rem]",
-    img: "h-[148%] w-auto max-w-none object-contain object-left -translate-y-[6%]",
+    text: "text-base sm:text-lg md:text-xl",
   },
   footer: {
-    box: "h-12 w-[9.5rem] sm:h-14 sm:w-[11rem]",
-    img: "h-full w-full object-contain object-left",
+    text: "text-lg sm:text-xl",
   },
   loader: {
-    box: "h-20 w-[16rem] sm:h-24 sm:w-[19rem] md:h-28 md:w-[22rem]",
-    img: "h-full w-full object-contain object-center",
+    text: "text-2xl sm:text-3xl md:text-4xl",
   },
   full: {
-    box: "h-16 w-[13rem] md:h-20 md:w-[16rem]",
-    img: "h-full w-full object-contain object-left",
+    text: "text-xl md:text-2xl",
   },
 } as const;
 
@@ -34,26 +30,17 @@ export function BrandLogo({
   variant = "full",
   animated = false,
 }: BrandLogoProps) {
-  const { box, img } = variants[variant];
+  const { text } = variants[variant];
 
   const content = (
     <span
       className={cn(
-        "relative inline-flex shrink-0 items-center overflow-hidden",
-        box,
+        "inline-flex shrink-0 items-center whitespace-nowrap font-semibold tracking-tight",
+        text,
         className
       )}
     >
-      <img
-        src={BRAND_LOGO_SRC}
-        alt={BRAND_NAME}
-        width={765}
-        height={326}
-        className={cn("pointer-events-none select-none", img)}
-        loading="eager"
-        decoding="async"
-        draggable={false}
-      />
+      {BRAND_PLACEHOLDER}
     </span>
   );
 
